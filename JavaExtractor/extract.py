@@ -32,7 +32,9 @@ def ExtractFeaturesForDir(args, dir, prefix):
     outputFileName = TMP_DIR + prefix + dir.split('/')[-1]
     failed = False
     with open("own_test.txt", 'a') as outputFile:
-        #print("\n####dir:"+ str(dir)+'\n',file = outputFile)
+        
+        print("\n####dir:"+ str(dir)+'\n',file = outputFile) # for tracking projects
+        
         sleeper = subprocess.Popen(command, stdout=outputFile, stderr=subprocess.PIPE)
         timer = Timer(60 * 60, kill, [sleeper])
         try:
