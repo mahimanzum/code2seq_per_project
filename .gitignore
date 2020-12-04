@@ -5,3 +5,11 @@
 *.xml
 *.pyc
 
+*.log
+models/
+*.txt
+*.gz
+*.pkl
+data/
+raw_data/
+tmp/

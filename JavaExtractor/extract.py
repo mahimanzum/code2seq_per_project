@@ -27,18 +27,19 @@ def ExtractFeaturesForDir(args, dir, prefix):
                '--max_path_length', str(args.max_path_length), '--max_path_width', str(args.max_path_width),
                '--dir', dir, '--num_threads', str(args.num_threads)]
 
-    # print command
     # os.system(command)
     kill = lambda process: process.kill()
     outputFileName = TMP_DIR + prefix + dir.split('/')[-1]
     failed = False
-    with open(outputFileName, 'a') as outputFile:
+    with open("own_test.txt", 'a') as outputFile:
+        #print("\n####dir:"+ str(dir)+'\n',file = outputFile)
         sleeper = subprocess.Popen(command, stdout=outputFile, stderr=subprocess.PIPE)
         timer = Timer(60 * 60, kill, [sleeper])
-
         try:
             timer.start()
             stdout, stderr = sleeper.communicate()
+            
+            
         finally:
             timer.cancel()
 
@@ -75,6 +76,7 @@ def ExtractFeaturesForDirsList(args, dirs):
 
 
 if __name__ == '__main__':
+    
     parser = ArgumentParser()
     parser.add_argument("-maxlen", "--max_path_length", dest="max_path_length", required=False, default=8)
     parser.add_argument("-maxwidth", "--max_path_width", dest="max_path_width", required=False, default=2)
@@ -82,6 +84,7 @@ if __name__ == '__main__':
     parser.add_argument("-j", "--jar", dest="jar", required=True)
     parser.add_argument("-dir", "--dir", dest="dir", required=False)
     parser.add_argument("-file", "--file", dest="file", required=False)
+    parser.add_argument("-task", "--task", dest="task", required=True)
     args = parser.parse_args()
 
     if args.file is not None:
